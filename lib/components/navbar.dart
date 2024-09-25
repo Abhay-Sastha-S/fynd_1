@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:fashiontinder3/pages/cart_page.dart';
-import '../pages/home_page.dart';
+//import '../pages/home_page.dart';
 // import 'package:fashiontinder3/pages/moodboard_page.dart';
-import 'package:fynd_1/pages/explore_page.dart';
+//import 'package:fynd_1/pages/explore_page.dart';
 // import 'package:fashiontinder3/pages/profile_page.dart';
 
 
