@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 // import 'package:fashiontinder3/pages/cart_page.dart';
 import '../pages/home_page.dart';
 // import 'package:fashiontinder3/pages/moodboard_page.dart';
-// import 'package:fashiontinder3/pages/explore_page.dart';
+import 'package:fynd_1/pages/explore_page.dart';
 // import 'package:fashiontinder3/pages/profile_page.dart';
+
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -11,12 +12,29 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _currentIndex = 0;
+  static int _currentIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+    switch (index) {
+      case 0:
+        // Navigate to home page
+        Navigator.pushReplacementNamed(context, '/explore');
+        break;
+      case 1:
+        // Navigate to explore page
+        //Navigator.pushReplacementNamed(context, '/cart');
+        break;
+      case 2:
+        // Navigate to profile page
+        Navigator.pushReplacementNamed(context, '/home');
+        break;
+      default:
+        // Handle default case
+        break;
+    }
   }
 
   @override
@@ -46,7 +64,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   Icons.explore,
                   color: _currentIndex == 0 ? Colors.blue : Colors.grey,
                 ),
-                
               ],
             ),
           ),
@@ -59,7 +76,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   Icons.shopping_cart,
                   color: _currentIndex == 1 ? Colors.blue : Colors.grey,
                 ),
-                
               ],
             ),
           ),
@@ -72,7 +88,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   Icons.home,
                   color: _currentIndex == 2 ? Colors.blue : Colors.grey,
                 ),
-                
               ],
             ),
           ),
