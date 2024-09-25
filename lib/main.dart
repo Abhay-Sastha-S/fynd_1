@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/landing_page.dart';
-import 'data_provider.dart';
+import 'providers/data_provider.dart';
 
 void main() {
   runApp(

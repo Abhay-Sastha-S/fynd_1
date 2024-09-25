@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../data_provider.dart';
+import '../providers/data_provider.dart';
 
 class FilterModule extends StatelessWidget {
   @override

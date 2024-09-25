@@ -15,6 +15,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   void _onItemTapped(int index) {
     setState(() {
+      _currentIndex = index;
     });
   }
 
@@ -104,15 +105,3 @@ class _BottomNavigationState extends State<BottomNavigation> {
     );
   }
 }
-
-
-
-        // type: BottomNavigationType.fixed,
-        // items: [
-        //   BottomNavigationItem(icon: Icon(Icons.explore), label: ''),
-        //   BottomNavigationItem(icon: Icon(Icons.shopping_cart), label: ''),
-        //   BottomNavigationItem(icon: Icon(Icons.home), label: ''),
-        //   BottomNavigationItem(icon: Icon(Icons.favorite), label: ''),
-        //   BottomNavigationItem(icon: Icon(Icons.person), label: ''),
-        // ],
-      

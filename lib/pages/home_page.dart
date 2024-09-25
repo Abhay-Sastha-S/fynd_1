@@ -4,7 +4,7 @@ import 'package:fynd_1/components/navbar.dart';
 import 'package:provider/provider.dart';
 
 import '../components/filter_dropdown.dart';
-import '../data_provider.dart';
+import '../providers/data_provider.dart';
 
 class HomePage extends StatelessWidget {
   final ScrollController scrollController = ScrollController();  // Initialize ScrollController
@@ -23,6 +23,16 @@ class HomePage extends StatelessWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
+        actions: [
+        IconButton(
+          padding: EdgeInsets.only(right: 10),
+          icon: Icon(Icons.undo),
+          onPressed: () {
+            // Implement undo logic here
+            print('Undo button pressed');
+          },
+        ),
+      ],
       ),
       drawer: Drawer(
         child: Padding(
