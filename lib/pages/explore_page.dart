@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'dart:math';
 import 'package:fynd_1/components/navbar.dart';
 
 // Assume you have a list of products with image URLs
@@ -22,49 +23,64 @@ class Product {
 }
 
 class ExplorePage extends StatelessWidget {
+  final Random random = Random();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text('Explore'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: MasonryGridView.builder(
-          gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        child: MasonryGridView.count(
+          crossAxisCount: 3,
           mainAxisSpacing: 8.0,
           crossAxisSpacing: 8.0,
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
-            return ProductImage(product: products[index]);
+            return ProductImage(
+              product: products[index],
+              aspectRatio: _getRandomAspectRatio(),
+            );
           },
         ),
       ),
-      bottomNavigationBar:BottomNavigation() ,
+      bottomNavigationBar: BottomNavigation(),
     );
+  }
+
+  double _getRandomAspectRatio() {
+    List<double> ratios = [1.0, 4/3, 3/4, 16/9, 9/16];
+    return ratios[random.nextInt(ratios.length)];
   }
 }
 
 class ProductImage extends StatelessWidget {
   final Product product;
+  final double aspectRatio;
 
-  ProductImage({required this.product});
+  ProductImage({required this.product, required this.aspectRatio});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to product details page when image is tapped
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ProductDetailsPage(product: product)),
         );
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0), // Rounded corners
-        child: Image.network(
-          product.imageUrl,
-          fit: BoxFit.cover, // Ensure the image fits the container
+      child: AspectRatio(
+        aspectRatio: aspectRatio,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Image.network(
+            product.imageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

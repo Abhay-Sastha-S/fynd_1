@@ -40,7 +40,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 45,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
