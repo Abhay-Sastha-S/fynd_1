@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fynd_1/providers/data_provider.dart';
+import '../providers/product_service.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
       overlayIcon = Icon(Icons.favorite, size: 200, color: Colors.white.withOpacity(1));
     } else if (horizontalOffsetPercentage < -35) {
       overlayIcon = Icon(Icons.close, size: 200, color: Colors.white.withOpacity(1));
-    } else if (verticalOffsetPercentage < 0) {
+    } else if (verticalOffsetPercentage < -35) {
       overlayIcon = Icon(Icons.shopping_cart, size: 200, color: Colors.white.withOpacity(1));
     }
 
@@ -46,10 +46,14 @@ class ProductCard extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
+                          color: Colors.white,
                           height: MediaQuery.of(context).size.height - 135, // Adjust as needed
-                          child: Image.network(
-                            product.images[0],
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.network(
+                              product.images[0],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Positioned(
@@ -57,36 +61,45 @@ class ProductCard extends StatelessWidget {
                           right: 0,
                           bottom: 0,
                           child: Container(
-                            height: 80,
+                            height: MediaQuery.of(context).size.height - 135,
                             padding: EdgeInsets.fromLTRB(10, 12, 10, 5),
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadiusDirectional.circular(20),
                               gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.6),
+                                      colors: [
+                                  Colors.black.withOpacity(0.16),
                                   Colors.transparent,
                                 ],
+                                stops: [0.001, 1.5],
                                 //transform: GradientTransform(),
                               ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  product.name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                SizedBox(height: MediaQuery.of(context).size.height-235),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                                  child: Text(
+                                    product.brand,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  '\$${product.price.toStringAsFixed(2)}',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 2),
+                                  child: Text(
+                                    '\$${product.price.toStringAsFixed(2)}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      //fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -143,6 +156,7 @@ class ProductCard extends StatelessWidget {
           ),
           if (overlayIcon != null)
             Positioned.fill(
+              left: 4, right: 4, top:4, bottom : 4,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.5),

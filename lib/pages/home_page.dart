@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/filter_dropdown.dart';
 import '../providers/data_provider.dart';
 import '../components/navbar.dart';
+import '../providers/product_service.dart';
 
 class HomePage extends StatelessWidget {
   final ScrollController scrollController = ScrollController();
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context);
+    final preloadedProducts = ProductService.getPreloadedProducts();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
         surfaceTintColor: Colors.white,
         backgroundColor: Colors.white,
         elevation: 0,
-      centerTitle: true,
+        centerTitle: true,
         title: Text(' fynd', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
         leading: Builder(
           builder: (BuildContext context) {
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            padding:EdgeInsets.only(right:10),
+            padding: EdgeInsets.only(right: 10),
             icon: Icon(Icons.undo),
             onPressed: () {
               print('Undo button pressed');
@@ -48,10 +50,10 @@ class HomePage extends StatelessWidget {
           controller: CardSwiperController(),
           allowedSwipeDirection: const AllowedSwipeDirection.only(
               up: true, right: true, left: true, down: false),
-          cardsCount: dataProvider.products.length,
+          cardsCount: preloadedProducts.length,
           cardBuilder: (BuildContext context, int index,
               int horizontalOffsetPercentage, int verticalOffsetPercentage) {
-            final product = dataProvider.products[index];
+            final product = preloadedProducts[index];
 
             // Reset scroll position when a new card is displayed
             WidgetsBinding.instance.addPostFrameCallback((_) {

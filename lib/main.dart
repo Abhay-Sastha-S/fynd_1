@@ -4,8 +4,11 @@ import 'package:fynd_1/pages/home_page.dart';
 import 'package:provider/provider.dart';
 import 'pages/landing_page.dart';
 import 'providers/data_provider.dart';
+import 'providers/product_service.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await ProductService.initHive();
   runApp(
     MultiProvider(
       providers: [
